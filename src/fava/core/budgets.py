@@ -2,6 +2,7 @@
 import datetime
 from collections import Counter
 from collections import defaultdict
+from itertools import chain
 from typing import Dict
 from typing import List
 from typing import NamedTuple
@@ -13,6 +14,7 @@ from beancount.core.number import Decimal
 from fava.core.module_base import FavaModule
 from fava.helpers import BeancountError
 from fava.util.date import days_in_daterange
+from fava.util.date import get_next_interval
 from fava.util.date import Interval
 from fava.util.date import number_of_days_in_period
 
@@ -25,6 +27,7 @@ class Budget(NamedTuple):
     period: Interval
     number: Decimal
     currency: str
+    periodic: bool = True
 
 
 BudgetDict = Dict[str, List[Budget]]
@@ -99,9 +102,22 @@ def parse_budgets(
         "yearly": Interval.YEAR,
     }
 
+    daterange_map = {
+        "day": Interval.DAY,
+        "week": Interval.WEEK,
+        "month": Interval.MONTH,
+        "quarter": Interval.QUARTER,
+        "year": Interval.YEAR,
+    }
+
     for entry in (entry for entry in custom_entries if entry.type == "budget"):
         try:
-            interval = interval_map.get(str(entry.values[1].value))
+            if str(entry.values[1].value) in interval_map:
+                interval = interval_map.get(str(entry.values[1].value))
+                periodic = True
+            else:
+                interval = daterange_map.get(str(entry.values[1].value))
+                periodic = False
             if not interval:
                 errors.append(
                     BudgetError(
@@ -117,6 +133,7 @@ def parse_budgets(
                 interval,
                 entry.values[2].value.number,
                 entry.values[2].value.currency,
+                periodic,
             )
             budgets[budget.account].append(budget)
         except (IndexError, TypeError):
@@ -134,13 +151,29 @@ def _matching_budgets(budgets, accounts, date_active):
         The budget that is active on the specified date for the
         specified account.
     """
-    last_seen_budgets = {}
+    matching_budgets = {}
+
     for budget in budgets[accounts]:
         if budget.date_start <= date_active:
-            last_seen_budgets[budget.currency] = budget
+            if budget.periodic:
+                if budget.currency in matching_budgets:
+                    if matching_budgets[budget.currency][0].periodic:
+                        matching_budgets[budget.currency][0] = budget
+                    else:
+                        matching_budgets[budget.currency].insert(0, budget)
+                else:
+                    matching_budgets[budget.currency] = [budget]
+            elif date_active < get_next_interval(
+                budget.date_start, budget.period
+            ):
+                if budget.currency in matching_budgets:
+                    matching_budgets[budget.currency].append(budget)
+                else:
+                    matching_budgets[budget.currency] = [budget]
         else:
             break
-    return last_seen_budgets
+
+    return matching_budgets
 
 
 def calculate_budget(
@@ -168,7 +201,7 @@ def calculate_budget(
 
     for single_day in days_in_daterange(date_from, date_to):
         matches = _matching_budgets(budgets, accounts, single_day)
-        for budget in matches.values():
+        for budget in chain(*matches.values()):
             currency_dict[
                 budget.currency
             ] += budget.number / number_of_days_in_period(
