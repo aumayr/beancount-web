@@ -69,7 +69,8 @@ export type LineChartData = {
 
 export interface BarChartDatumValue {
   name: string;
-  value: number;
+  value: Record<string, number>;
+  total_value: number;
   budget: number;
 }
 
@@ -88,7 +89,11 @@ export interface HierarchyChart {
 export interface BarChart {
   type: "barchart";
   data: BarChartDatum[];
-  tooltipText: (c: FormatterContext, d: BarChartDatum) => string;
+  tooltipText: (
+    c: FormatterContext,
+    d: BarChartDatum,
+    account: string
+  ) => string;
 }
 
 export interface LineChart {
@@ -159,14 +164,22 @@ export function commodities(json: unknown, label: string): LineChart {
 
 export function bar(json: unknown): BarChart {
   const validator = array(
-    object({ date, budgets: record(number), balance: record(number) })
+    object({
+      date,
+      budgets: record(number),
+      balance: record(record(number)),
+      total_balance: record(number),
+    })
   );
   const parsedData = validator(json);
   const currentDateFmt = get(currentDateFormat);
   const data = parsedData.map((d) => ({
     values: get(operatingCurrenciesWithConversion).map((name: string) => ({
       name,
-      value: d.balance[name] || 0,
+      value: new Map(
+        Object.entries(d.balance).map(([k, v]) => [k, v[name] || 0])
+      ),
+      total_value: d.total_balance[name] || 0,
       budget: d.budgets[name] || 0,
     })),
     date: d.date,
@@ -174,16 +187,19 @@ export function bar(json: unknown): BarChart {
   }));
   return {
     data,
-    tooltipText: (c, d) => {
+    tooltipText: (c, d, account) => {
       let text = "";
       d.values.forEach((a) => {
-        text += `${c.currency(a.value)} ${a.name}`;
+        text += `${c.currency(
+          account === null ? a.total_value : a.value.get(account)
+        )} ${a.name}`;
         if (a.budget) {
           text += ` / ${c.currency(a.budget)} ${a.name}`;
         }
         text += "<br>";
       });
       text += `<em>${d.label}</em>`;
+      text += `<span>${account === null ? "Net" : account}</span>`;
       return text;
     },
     type: "barchart",
