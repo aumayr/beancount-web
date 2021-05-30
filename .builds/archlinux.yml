@@ -1,0 +1,20 @@
+image: archlinux
+packages:
+    - nodejs
+    - npm
+    - python
+    - python-distlib
+    - python-pip
+    - python-pre-commit
+    - python-setuptools
+    - python-tox
+    - python-wheel
+sources:
+    - https://github.com/beancount/fava
+tasks:
+    - build: |
+          make -C fava
+    - lint: |
+          make -C fava lint
+    - test: |
+          make -C fava test

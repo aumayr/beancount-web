@@ -1,0 +1,44 @@
+name: Test
+
+on:
+    workflow_dispatch:
+    push:
+        branches:
+            - main
+    pull_request:
+        branches:
+            - main
+
+jobs:
+    build:
+        runs-on: ${{ matrix.os }}
+        strategy:
+            matrix:
+                py: [3.6, 3.9]
+                os: [windows-latest, macos-latest, ubuntu-latest]
+
+        steps:
+            - uses: actions/checkout@v2
+            - name: Set up Python ${{ matrix.py }}
+              uses: actions/setup-python@v2
+              with:
+                  py: ${{ matrix.py }}
+            - name: Set up Node
+              uses: actions/setup-node@v1
+              with:
+                  node-version: "14"
+            - name: Install tox
+              run: pip install tox
+            - name: Install node dependencies
+              run: cd frontend && npm ci
+            - name: pre-commit
+              if: ${{ matrix.os == 'ubuntu-latest' && matrix.py == 3.9 }}
+              uses: pre-commit/action@v2.0.0
+            - name: Lint
+              if: ${{ matrix.os == 'ubuntu-latest' && matrix.py == 3.9 }}
+              run: tox -e lint
+            - name: Test
+              run: make test
+            - name: PyInstaller build
+              if: ${{ matrix.os == 'ubuntu-latest' && matrix.py == 3.9 }}
+              run: tox -e pyinstaller

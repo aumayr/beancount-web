@@ -1,0 +1,37 @@
+repos:
+    - repo: https://github.com/psf/black
+      rev: 20.8b1
+      hooks:
+          - id: black
+    - repo: https://github.com/asottile/reorder_python_imports
+      rev: v2.3.6
+      hooks:
+          - id: reorder-python-imports
+            args: ["--application-directories=.:src"]
+    - repo: https://gitlab.com/pycqa/flake8
+      rev: 3.8.4
+      hooks:
+          - id: flake8
+    - repo: https://github.com/asottile/pyupgrade
+      rev: v2.9.0
+      hooks:
+          - id: pyupgrade
+            args: ["--py36-plus"]
+    - repo: local
+      hooks:
+          - id: prettier
+            name: prettier
+            language: node
+            entry:
+                ./frontend/node_modules/prettier/bin-prettier.js --write
+                --list-different --ignore-unknown
+          - id: stylelint
+            name: stylelint
+            language: node
+            entry: ./frontend/node_modules/stylelint/bin/stylelint.js --fix
+            files: \.(css|svelte)$
+          - id: eslint
+            name: eslint
+            language: node
+            entry: ./frontend/node_modules/eslint/bin/eslint.js
+            files: \.(js|ts|svelte)$

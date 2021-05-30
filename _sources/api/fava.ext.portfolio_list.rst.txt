@@ -1,0 +1,5 @@
+fava.ext.portfolio_list
+=======================
+
+.. automodule:: fava.ext.portfolio_list
+

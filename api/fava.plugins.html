@@ -1,0 +1,153 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>fava.plugins &#8212; Fava  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="fava.util" href="fava.util.html" />
+    <link rel="prev" title="fava.help" href="fava.help.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-fava.plugins">
+<span id="fava-plugins"></span><h1>fava.plugins<a class="headerlink" href="#module-fava.plugins" title="Permalink to this headline">¶</a></h1>
+<section id="module-fava.plugins.link_documents">
+<span id="fava-plugins-link-documents"></span><h2>fava.plugins.link_documents<a class="headerlink" href="#module-fava.plugins.link_documents" title="Permalink to this headline">¶</a></h2>
+<p>Beancount plugin to link transactions to documents.</p>
+<p>It goes through all transactions with a <cite>document</cite> metadata-key, and tries to
+associate them to Document entries. It then adds a link from transactions to
+documents, as well as the “#linked” tag.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="fava.plugins.link_documents.DocumentError">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">fava.plugins.link_documents.</span></span><span class="sig-name descname"><span class="pre">DocumentError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">entry</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fava.plugins.link_documents.DocumentError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Document-linking related error.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="fava.plugins.link_documents.add_to_set">
+<span class="sig-prename descclassname"><span class="pre">fava.plugins.link_documents.</span></span><span class="sig-name descname"><span class="pre">add_to_set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">set_</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">AbstractSet</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Set</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#fava.plugins.link_documents.add_to_set" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add an entry to a set (or create it if doesn’t exist).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="fava.plugins.link_documents.link_documents">
+<span class="sig-prename descclassname"><span class="pre">fava.plugins.link_documents.</span></span><span class="sig-name descname"><span class="pre">link_documents</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">entries</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">beancount.core.data.Open</span><span class="p"><span class="pre">,</span> </span><span class="pre">beancount.core.data.Close</span><span class="p"><span class="pre">,</span> </span><span class="pre">beancount.core.data.Commodity</span><span class="p"><span class="pre">,</span> </span><span class="pre">beancount.core.data.Pad</span><span class="p"><span class="pre">,</span> </span><span class="pre">beancount.core.data.Balance</span><span class="p"><span class="pre">,</span> </span><span class="pre">beancount.core.data.Transaction</span><span class="p"><span class="pre">,</span> </span><span class="pre">beancount.core.data.Note</span><span class="p"><span class="pre">,</span> </span><span class="pre">beancount.core.data.Event</span><span class="p"><span class="pre">,</span> </span><span class="pre">beancount.core.data.Query</span><span class="p"><span class="pre">,</span> </span><span class="pre">beancount.core.data.Price</span><span class="p"><span class="pre">,</span> </span><span class="pre">beancount.core.data.Document</span><span class="p"><span class="pre">,</span> </span><span class="pre">beancount.core.data.Custom</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">beancount.core.data.Open</span><span class="p"><span class="pre">,</span> </span><span class="pre">beancount.core.data.Close</span><span class="p"><span class="pre">,</span> </span><span class="pre">beancount.core.data.Commodity</span><span class="p"><span class="pre">,</span> </span><span class="pre">beancount.core.data.Pad</span><span class="p"><span class="pre">,</span> </span><span class="pre">beancount.core.data.Balance</span><span class="p"><span class="pre">,</span> </span><span class="pre">beancount.core.data.Transaction</span><span class="p"><span class="pre">,</span> </span><span class="pre">beancount.core.data.Note</span><span class="p"><span class="pre">,</span> </span><span class="pre">beancount.core.data.Event</span><span class="p"><span class="pre">,</span> </span><span class="pre">beancount.core.data.Query</span><span class="p"><span class="pre">,</span> </span><span class="pre">beancount.core.data.Price</span><span class="p"><span class="pre">,</span> </span><span class="pre">beancount.core.data.Document</span><span class="p"><span class="pre">,</span> </span><span class="pre">beancount.core.data.Custom</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#fava.plugins.link_documents.DocumentError" title="fava.plugins.link_documents.DocumentError"><span class="pre">fava.plugins.link_documents.DocumentError</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#fava.plugins.link_documents.link_documents" title="Permalink to this definition">¶</a></dt>
+<dd><p>Link transactions to documents.</p>
+</dd></dl>
+
+</section>
+<section id="module-fava.plugins.tag_discovered_documents">
+<span id="fava-plugins-tag-discovered-documents"></span><h2>fava.plugins.tag_discovered_documents<a class="headerlink" href="#module-fava.plugins.tag_discovered_documents" title="Permalink to this headline">¶</a></h2>
+<p>Beancount plugin to tag discovered documents.</p>
+<p>It looks through all Document entries that were added by Beancount
+automatically through file discovery and adds the tag “#discovered”.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="fava.plugins.tag_discovered_documents.tag_discovered_documents">
+<span class="sig-prename descclassname"><span class="pre">fava.plugins.tag_discovered_documents.</span></span><span class="sig-name descname"><span class="pre">tag_discovered_documents</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">entries</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">beancount.core.data.Open</span><span class="p"><span class="pre">,</span> </span><span class="pre">beancount.core.data.Close</span><span class="p"><span class="pre">,</span> </span><span class="pre">beancount.core.data.Commodity</span><span class="p"><span class="pre">,</span> </span><span class="pre">beancount.core.data.Pad</span><span class="p"><span class="pre">,</span> </span><span class="pre">beancount.core.data.Balance</span><span class="p"><span class="pre">,</span> </span><span class="pre">beancount.core.data.Transaction</span><span class="p"><span class="pre">,</span> </span><span class="pre">beancount.core.data.Note</span><span class="p"><span class="pre">,</span> </span><span class="pre">beancount.core.data.Event</span><span class="p"><span class="pre">,</span> </span><span class="pre">beancount.core.data.Query</span><span class="p"><span class="pre">,</span> </span><span class="pre">beancount.core.data.Price</span><span class="p"><span class="pre">,</span> </span><span class="pre">beancount.core.data.Document</span><span class="p"><span class="pre">,</span> </span><span class="pre">beancount.core.data.Custom</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options_map</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="fava.util.html#fava.util.typing.BeancountOptions" title="fava.util.typing.BeancountOptions"><span class="pre">fava.util.typing.BeancountOptions</span></a></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">beancount.core.data.Open</span><span class="p"><span class="pre">,</span> </span><span class="pre">beancount.core.data.Close</span><span class="p"><span class="pre">,</span> </span><span class="pre">beancount.core.data.Commodity</span><span class="p"><span class="pre">,</span> </span><span class="pre">beancount.core.data.Pad</span><span class="p"><span class="pre">,</span> </span><span class="pre">beancount.core.data.Balance</span><span class="p"><span class="pre">,</span> </span><span class="pre">beancount.core.data.Transaction</span><span class="p"><span class="pre">,</span> </span><span class="pre">beancount.core.data.Note</span><span class="p"><span class="pre">,</span> </span><span class="pre">beancount.core.data.Event</span><span class="p"><span class="pre">,</span> </span><span class="pre">beancount.core.data.Query</span><span class="p"><span class="pre">,</span> </span><span class="pre">beancount.core.data.Price</span><span class="p"><span class="pre">,</span> </span><span class="pre">beancount.core.data.Document</span><span class="p"><span class="pre">,</span> </span><span class="pre">beancount.core.data.Custom</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="fava.html#fava.helpers.BeancountError" title="fava.helpers.BeancountError"><span class="pre">fava.helpers.BeancountError</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#fava.plugins.tag_discovered_documents.tag_discovered_documents" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tag automatically added documents.</p>
+</dd></dl>
+
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../index.html">
+    <img class="logo" src="../_static/logo.png" alt="Logo"/>
+    
+    <h1 class="logo logo-name">Fava</h1>
+    
+  </a>
+</p>
+
+
+
+<p class="blurb">Web interface for <a href="http://furius.ca/beancount/">Beancount</a></p>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">Development</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html">API Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="fava.html">fava</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fava.core.html">fava.core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fava.ext.html">fava.ext</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fava.ext.portfolio_list.html">fava.ext.portfolio_list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fava.help.html">fava.help</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">fava.plugins</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#module-fava.plugins.link_documents">fava.plugins.link_documents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-fava.plugins.tag_discovered_documents">fava.plugins.tag_discovered_documents</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="fava.util.html">fava.util</a></li>
+</ul>
+</li>
+</ul>
+
+
+<hr />
+<ul>
+    
+    <li class="toctree-l1"><a href="https://github.com/beancount/fava">fava @ GitHub</a></li>
+    
+    <li class="toctree-l1"><a href="https://gitter.im/beancount/fava">Chat</a></li>
+    
+    <li class="toctree-l1"><a href="https://github.com/beancount/fava/issues">Issue Tracker</a></li>
+    
+</ul>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Dominik Aumayr.
+      
+      |
+      <a href="../_sources/api/fava.plugins.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

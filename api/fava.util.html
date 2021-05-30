@@ -1,0 +1,640 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>fava.util &#8212; Fava  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="fava.plugins" href="fava.plugins.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-fava.util">
+<span id="fava-util"></span><h1>fava.util<a class="headerlink" href="#module-fava.util" title="Permalink to this headline">¶</a></h1>
+<p>Some small utility functions.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="fava.util.filter_api_changed">
+<span class="sig-prename descclassname"><span class="pre">fava.util.</span></span><span class="sig-name descname"><span class="pre">filter_api_changed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">record</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fava.util.filter_api_changed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filter out LogRecords for requests that poll for changes.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="fava.util.listify">
+<span class="sig-prename descclassname"><span class="pre">fava.util.</span></span><span class="sig-name descname"><span class="pre">listify</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">Generator</span><span class="p"><span class="pre">[</span></span><span class="pre">fava.util.Item</span><span class="p"><span class="pre">,</span> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><span class="pre">None</span></a><span class="p"><span class="pre">,</span> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><span class="pre">None</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">fava.util.Item</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#fava.util.listify" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decorator to make generator function return a list.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="fava.util.next_key">
+<span class="sig-prename descclassname"><span class="pre">fava.util.</span></span><span class="sig-name descname"><span class="pre">next_key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">basekey</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><a class="headerlink" href="#fava.util.next_key" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the next unused key for basekey in the supplied dictionary.</p>
+<p>The first try is <cite>basekey</cite>, followed by <cite>basekey-2</cite>, <cite>basekey-3</cite>, etc
+until a free one is found.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="fava.util.pairwise">
+<span class="sig-prename descclassname"><span class="pre">fava.util.</span></span><span class="sig-name descname"><span class="pre">pairwise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">iterable</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">fava.util.Item</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">fava.util.Item</span><span class="p"><span class="pre">,</span> </span><span class="pre">fava.util.Item</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#fava.util.pairwise" title="Permalink to this definition">¶</a></dt>
+<dd><p>s -&gt; (s0,s1), (s1,s2), (s2, s3), …</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="fava.util.resource_path">
+<span class="sig-prename descclassname"><span class="pre">fava.util.</span></span><span class="sig-name descname"><span class="pre">resource_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">relative_path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.9)"><span class="pre">pathlib.Path</span></a><a class="headerlink" href="#fava.util.resource_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get absolute path to resource.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="fava.util.send_file_inline">
+<span class="sig-prename descclassname"><span class="pre">fava.util.</span></span><span class="sig-name descname"><span class="pre">send_file_inline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Any</span><a class="headerlink" href="#fava.util.send_file_inline" title="Permalink to this definition">¶</a></dt>
+<dd><p>Send a file inline, including the original filename.</p>
+<p>Ref: <a class="reference external" href="http://test.greenbytes.de/tech/tc2231/">http://test.greenbytes.de/tech/tc2231/</a>.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="fava.util.setup_logging">
+<span class="sig-prename descclassname"><span class="pre">fava.util.</span></span><span class="sig-name descname"><span class="pre">setup_logging</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><span class="pre">None</span></a><a class="headerlink" href="#fava.util.setup_logging" title="Permalink to this definition">¶</a></dt>
+<dd><p>Setup logging for Fava.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="fava.util.simple_wsgi">
+<span class="sig-prename descclassname"><span class="pre">fava.util.</span></span><span class="sig-name descname"><span class="pre">simple_wsgi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_response</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fava.util.simple_wsgi" title="Permalink to this definition">¶</a></dt>
+<dd><p>A simple wsgi app that always returns an empty response.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="fava.util.slugify">
+<span class="sig-prename descclassname"><span class="pre">fava.util.</span></span><span class="sig-name descname"><span class="pre">slugify</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><a class="headerlink" href="#fava.util.slugify" title="Permalink to this definition">¶</a></dt>
+<dd><p>Slugify a string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>string</strong> – A string.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A ‘slug’ of the string suitable for URLs. Retains non-ascii
+characters.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="fava.util.timefunc">
+<span class="sig-prename descclassname"><span class="pre">fava.util.</span></span><span class="sig-name descname"><span class="pre">timefunc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fava.util.timefunc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decorator to time function for debugging.</p>
+</dd></dl>
+
+<section id="module-fava.util.date">
+<span id="fava-util-date"></span><h2>fava.util.date<a class="headerlink" href="#module-fava.util.date" title="Permalink to this headline">¶</a></h2>
+<p>Date-related functionality.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Date ranges are always tuples (start, end) from the (inclusive) start date
+to the (exclusive) end date.</p>
+</div>
+<dl class="py class">
+<dt class="sig sig-object py" id="fava.util.date.FiscalYearEnd">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">fava.util.date.</span></span><span class="sig-name descname"><span class="pre">FiscalYearEnd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">month</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">day</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fava.util.date.FiscalYearEnd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Month and day that specify the end of the fiscal year.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="fava.util.date.Interval">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">fava.util.date.</span></span><span class="sig-name descname"><span class="pre">Interval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fava.util.date.Interval" title="Permalink to this definition">¶</a></dt>
+<dd><p>The possible intervals.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="fava.util.date.Interval.DAY">
+<span class="sig-name descname"><span class="pre">DAY</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'day'</span></em><a class="headerlink" href="#fava.util.date.Interval.DAY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="fava.util.date.Interval.MONTH">
+<span class="sig-name descname"><span class="pre">MONTH</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'month'</span></em><a class="headerlink" href="#fava.util.date.Interval.MONTH" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="fava.util.date.Interval.QUARTER">
+<span class="sig-name descname"><span class="pre">QUARTER</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'quarter'</span></em><a class="headerlink" href="#fava.util.date.Interval.QUARTER" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="fava.util.date.Interval.WEEK">
+<span class="sig-name descname"><span class="pre">WEEK</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'week'</span></em><a class="headerlink" href="#fava.util.date.Interval.WEEK" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="fava.util.date.Interval.YEAR">
+<span class="sig-name descname"><span class="pre">YEAR</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'year'</span></em><a class="headerlink" href="#fava.util.date.Interval.YEAR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fava.util.date.Interval.get">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#fava.util.date.Interval" title="fava.util.date.Interval"><span class="pre">fava.util.date.Interval</span></a><a class="headerlink" href="#fava.util.date.Interval.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the enum member for a string.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="fava.util.date.Interval.label">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">label</span></span><em class="property"><span class="pre">:</span> <span class="pre">fava.util.date.Interval</span></em><a class="headerlink" href="#fava.util.date.Interval.label" title="Permalink to this definition">¶</a></dt>
+<dd><p>The label for the interval.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="fava.util.date.days_in_daterange">
+<span class="sig-prename descclassname"><span class="pre">fava.util.date.</span></span><span class="sig-name descname"><span class="pre">days_in_daterange</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start_date</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.date" title="(in Python v3.9)"><span class="pre">datetime.date</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_date</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.date" title="(in Python v3.9)"><span class="pre">datetime.date</span></a></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.date" title="(in Python v3.9)"><span class="pre">datetime.date</span></a><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#fava.util.date.days_in_daterange" title="Permalink to this definition">¶</a></dt>
+<dd><p>Yield a datetime for every day in the specified interval.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>start_date</strong> – A start date.</p></li>
+<li><p><strong>end_date</strong> – An end date (exclusive).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An iterator yielding all days between <cite>start_date</cite> to <cite>end_date</cite>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="fava.util.date.get_fiscal_period">
+<span class="sig-prename descclassname"><span class="pre">fava.util.date.</span></span><span class="sig-name descname"><span class="pre">get_fiscal_period</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">year</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">fye</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#fava.util.date.FiscalYearEnd" title="fava.util.date.FiscalYearEnd"><span class="pre">fava.util.date.FiscalYearEnd</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quarter</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.date" title="(in Python v3.9)"><span class="pre">datetime.date</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.date" title="(in Python v3.9)"><span class="pre">datetime.date</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#fava.util.date.get_fiscal_period" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates fiscal periods</p>
+<p>Uses the fava option “fiscal-year-end” which should be in “%m-%d” format.
+Defaults to calendar year [12-31]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>year</strong> – An integer year</p></li>
+<li><p><strong>fye</strong> – End date for period in “%m-%d” format</p></li>
+<li><p><strong>quarter</strong> – one of [None, 1, 2, 3 or 4]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A tuple (start, end) of dates.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="fava.util.date.get_next_interval">
+<span class="sig-prename descclassname"><span class="pre">fava.util.date.</span></span><span class="sig-name descname"><span class="pre">get_next_interval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">date</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.date" title="(in Python v3.9)"><span class="pre">datetime.date</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">interval</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#fava.util.date.Interval" title="fava.util.date.Interval"><span class="pre">fava.util.date.Interval</span></a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.date" title="(in Python v3.9)"><span class="pre">datetime.date</span></a><a class="headerlink" href="#fava.util.date.get_next_interval" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the start date of the next interval.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>date</strong> – A date.</p></li>
+<li><p><strong>interval</strong> – An interval.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The start date of the next <cite>interval</cite> after <cite>date</cite>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="fava.util.date.interval_ends">
+<span class="sig-prename descclassname"><span class="pre">fava.util.date.</span></span><span class="sig-name descname"><span class="pre">interval_ends</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">first</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.date" title="(in Python v3.9)"><span class="pre">datetime.date</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">last</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.date" title="(in Python v3.9)"><span class="pre">datetime.date</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">interval</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#fava.util.date.Interval" title="fava.util.date.Interval"><span class="pre">fava.util.date.Interval</span></a></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.date" title="(in Python v3.9)"><span class="pre">datetime.date</span></a><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#fava.util.date.interval_ends" title="Permalink to this definition">¶</a></dt>
+<dd><p>List intervals.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>first</strong> – A date.</p></li>
+<li><p><strong>last</strong> – A date.</p></li>
+<li><p><strong>interval</strong> – An interval.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Yields</dt>
+<dd class="field-even"><p>Dates corresponding to the starts/ends of intervals between <cite>first</cite> and
+<cite>last</cite>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="fava.util.date.month_offset">
+<span class="sig-prename descclassname"><span class="pre">fava.util.date.</span></span><span class="sig-name descname"><span class="pre">month_offset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">date</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.date" title="(in Python v3.9)"><span class="pre">datetime.date</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">months</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.date" title="(in Python v3.9)"><span class="pre">datetime.date</span></a><a class="headerlink" href="#fava.util.date.month_offset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Offsets a date by a given number of months</p>
+<p>Maintains the day, unless that day is invalid when it will
+raise a ValueError</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="fava.util.date.number_of_days_in_period">
+<span class="sig-prename descclassname"><span class="pre">fava.util.date.</span></span><span class="sig-name descname"><span class="pre">number_of_days_in_period</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">interval</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#fava.util.date.Interval" title="fava.util.date.Interval"><span class="pre">fava.util.date.Interval</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">date</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.date" title="(in Python v3.9)"><span class="pre">datetime.date</span></a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a><a class="headerlink" href="#fava.util.date.number_of_days_in_period" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of days in the surrounding interval.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>interval</strong> – An interval.</p></li>
+<li><p><strong>date</strong> – A date.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A number, the number of days surrounding the given date in the
+interval.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="fava.util.date.parse_date">
+<span class="sig-prename descclassname"><span class="pre">fava.util.date.</span></span><span class="sig-name descname"><span class="pre">parse_date</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">fye</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#fava.util.date.FiscalYearEnd" title="fava.util.date.FiscalYearEnd"><span class="pre">fava.util.date.FiscalYearEnd</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.date" title="(in Python v3.9)"><span class="pre">datetime.date</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.date" title="(in Python v3.9)"><span class="pre">datetime.date</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#fava.util.date.parse_date" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse a date.</p>
+<p>Example of supported formats:</p>
+<ul class="simple">
+<li><p>2010-03-15, 2010-03, 2010</p></li>
+<li><p>2010-W01, 2010-Q3</p></li>
+<li><p>FY2012, FY2012-Q2</p></li>
+</ul>
+<p>Ranges of dates can be expressed in the following forms:</p>
+<ul class="simple">
+<li><p>start - end</p></li>
+<li><p>start to end</p></li>
+</ul>
+<p>where start and end look like one of the above examples</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>string</strong> – A date(range) in our custom format.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A tuple (start, end) of dates.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="fava.util.date.parse_fye_string">
+<span class="sig-prename descclassname"><span class="pre">fava.util.date.</span></span><span class="sig-name descname"><span class="pre">parse_fye_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fye</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#fava.util.date.FiscalYearEnd" title="fava.util.date.FiscalYearEnd"><span class="pre">fava.util.date.FiscalYearEnd</span></a><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#fava.util.date.parse_fye_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse a string option for the fiscal year end.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>fye</strong> – The end of the fiscal year to parse.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="fava.util.date.substitute">
+<span class="sig-prename descclassname"><span class="pre">fava.util.date.</span></span><span class="sig-name descname"><span class="pre">substitute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">fye</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#fava.util.date.FiscalYearEnd" title="fava.util.date.FiscalYearEnd"><span class="pre">fava.util.date.FiscalYearEnd</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><a class="headerlink" href="#fava.util.date.substitute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Replace variables referring to the current day.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>string</strong> – A string, possibly containing variables for today.</p></li>
+<li><p><strong>fye</strong> – Use a specific fiscal-year-end</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A string, where variables referring to the current day, like ‘year’ or
+‘week’ have been replaced by the corresponding string understood by
+<a class="reference internal" href="#fava.util.date.parse_date" title="fava.util.date.parse_date"><code class="xref py py-func docutils literal notranslate"><span class="pre">parse_date()</span></code></a>.  Can compute addition and subtraction.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-fava.util.excel">
+<span id="fava-util-excel"></span><h2>fava.util.excel<a class="headerlink" href="#module-fava.util.excel" title="Permalink to this headline">¶</a></h2>
+<p>Writing query results to CSV and spreadsheet documents.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="fava.util.excel.to_csv">
+<span class="sig-prename descclassname"><span class="pre">fava.util.excel.</span></span><span class="sig-name descname"><span class="pre">to_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">types</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rows</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fava.util.excel.to_csv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save result to CSV.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>types</strong> – query result_types.</p></li>
+<li><p><strong>rows</strong> – query result_rows.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The (binary) file contents.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="fava.util.excel.to_excel">
+<span class="sig-prename descclassname"><span class="pre">fava.util.excel.</span></span><span class="sig-name descname"><span class="pre">to_excel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">types</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rows</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result_format</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">query_string</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fava.util.excel.to_excel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save result to spreadsheet document.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>types</strong> – query result_types.</p></li>
+<li><p><strong>rows</strong> – query result_rows.</p></li>
+<li><p><strong>result_format</strong> – One of ‘xls’, ‘xlsx’, or ‘ods’.</p></li>
+<li><p><strong>query_string</strong> – The query string (is written to the document).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The (binary) file contents.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-fava.util.ranking">
+<span id="fava-util-ranking"></span><h2>fava.util.ranking<a class="headerlink" href="#module-fava.util.ranking" title="Permalink to this headline">¶</a></h2>
+<p>Ranking utilities.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="fava.util.ranking.ExponentialDecayRanker">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">fava.util.ranking.</span></span><span class="sig-name descname"><span class="pre">ExponentialDecayRanker</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">list_</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rate</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><span class="pre">float</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.0018990333713971104</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fava.util.ranking.ExponentialDecayRanker" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rank a list by exponential decay.</p>
+<p>Maintains scores for the items in a list. We can think of this as the sum
+of all ‘likes’, where the value of a ‘like’ starts at 1 and decays
+exponentially. So the current score would be given by (where <cite>t</cite> is the
+current time and <cite>l</cite> is the time of the ‘like’)</p>
+<blockquote>
+<div><p>s = Σ exp(-RATE * (t - l))</p>
+</div></blockquote>
+<p>As only the relative order on the items is relevant, we can multiply all
+scores by exp(RATE * t) and so we need to compute the following
+score:</p>
+<blockquote>
+<div><p>s = Σ exp(RATE * l)</p>
+</div></blockquote>
+<p>To avoid huge numbers, we actually compute and store the logarithm of that
+sum.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>list</strong> – If given, this list is ranked is by <code class="docutils literal notranslate"><span class="pre">.sort()</span></code> otherwise all
+items with at least one ‘like’ will be ranked.</p></li>
+<li><p><strong>rate</strong> – This sets the rate of decay. <code class="docutils literal notranslate"><span class="pre">1/rate</span></code> will be the time (in
+days) that it takes for the value of a ‘like’ to decrease by
+<code class="docutils literal notranslate"><span class="pre">1/e</span></code>. The default rate is set to <code class="docutils literal notranslate"><span class="pre">math.log(2)</span> <span class="pre">*</span> <span class="pre">1/365</span></code> so
+that a ‘like’ from a year ago will count half as much as one from
+today.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="fava.util.ranking.ExponentialDecayRanker.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">item</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><span class="pre">float</span></a><a class="headerlink" href="#fava.util.ranking.ExponentialDecayRanker.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the current score for an item, or zero.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="fava.util.ranking.ExponentialDecayRanker.list">
+<span class="sig-name descname"><span class="pre">list</span></span><a class="headerlink" href="#fava.util.ranking.ExponentialDecayRanker.list" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="fava.util.ranking.ExponentialDecayRanker.rate">
+<span class="sig-name descname"><span class="pre">rate</span></span><a class="headerlink" href="#fava.util.ranking.ExponentialDecayRanker.rate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="fava.util.ranking.ExponentialDecayRanker.scores">
+<span class="sig-name descname"><span class="pre">scores</span></span><a class="headerlink" href="#fava.util.ranking.ExponentialDecayRanker.scores" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fava.util.ranking.ExponentialDecayRanker.sort">
+<span class="sig-name descname"><span class="pre">sort</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#fava.util.ranking.ExponentialDecayRanker.sort" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return items sorted by rank.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fava.util.ranking.ExponentialDecayRanker.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">item</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">date</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.date" title="(in Python v3.9)"><span class="pre">datetime.date</span></a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><span class="pre">None</span></a><a class="headerlink" href="#fava.util.ranking.ExponentialDecayRanker.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add ‘like’ for item.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>item</strong> – An item in the list that is being ranked.</p></li>
+<li><p><strong>date</strong> – The date on which the item has been liked.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-fava.util.typing">
+<span id="fava-util-typing"></span><h2>fava.util.typing<a class="headerlink" href="#module-fava.util.typing" title="Permalink to this headline">¶</a></h2>
+<p>Typing helpers.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="fava.util.typing.BeancountOptions">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">fava.util.typing.</span></span><span class="sig-name descname"><span class="pre">BeancountOptions</span></span><a class="headerlink" href="#fava.util.typing.BeancountOptions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Beancount options.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="fava.util.typing.BeancountOptions.account_current_conversions">
+<span class="sig-name descname"><span class="pre">account_current_conversions</span></span><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></em><a class="headerlink" href="#fava.util.typing.BeancountOptions.account_current_conversions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="fava.util.typing.BeancountOptions.account_current_earnings">
+<span class="sig-name descname"><span class="pre">account_current_earnings</span></span><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></em><a class="headerlink" href="#fava.util.typing.BeancountOptions.account_current_earnings" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="fava.util.typing.BeancountOptions.dcontext">
+<span class="sig-name descname"><span class="pre">dcontext</span></span><em class="property"><span class="pre">:</span> <span class="pre">beancount.core.display_context.DisplayContext</span></em><a class="headerlink" href="#fava.util.typing.BeancountOptions.dcontext" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="fava.util.typing.BeancountOptions.documents">
+<span class="sig-name descname"><span class="pre">documents</span></span><em class="property"><span class="pre">:</span> <span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#fava.util.typing.BeancountOptions.documents" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="fava.util.typing.BeancountOptions.include">
+<span class="sig-name descname"><span class="pre">include</span></span><em class="property"><span class="pre">:</span> <span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#fava.util.typing.BeancountOptions.include" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="fava.util.typing.BeancountOptions.name_assets">
+<span class="sig-name descname"><span class="pre">name_assets</span></span><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></em><a class="headerlink" href="#fava.util.typing.BeancountOptions.name_assets" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="fava.util.typing.BeancountOptions.name_equity">
+<span class="sig-name descname"><span class="pre">name_equity</span></span><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></em><a class="headerlink" href="#fava.util.typing.BeancountOptions.name_equity" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="fava.util.typing.BeancountOptions.name_expenses">
+<span class="sig-name descname"><span class="pre">name_expenses</span></span><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></em><a class="headerlink" href="#fava.util.typing.BeancountOptions.name_expenses" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="fava.util.typing.BeancountOptions.name_income">
+<span class="sig-name descname"><span class="pre">name_income</span></span><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></em><a class="headerlink" href="#fava.util.typing.BeancountOptions.name_income" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="fava.util.typing.BeancountOptions.name_liabilities">
+<span class="sig-name descname"><span class="pre">name_liabilities</span></span><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></em><a class="headerlink" href="#fava.util.typing.BeancountOptions.name_liabilities" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="fava.util.typing.BeancountOptions.operating_currency">
+<span class="sig-name descname"><span class="pre">operating_currency</span></span><em class="property"><span class="pre">:</span> <span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#fava.util.typing.BeancountOptions.operating_currency" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="fava.util.typing.BeancountOptions.render_commas">
+<span class="sig-name descname"><span class="pre">render_commas</span></span><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></em><a class="headerlink" href="#fava.util.typing.BeancountOptions.render_commas" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="fava.util.typing.BeancountOptions.title">
+<span class="sig-name descname"><span class="pre">title</span></span><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></em><a class="headerlink" href="#fava.util.typing.BeancountOptions.title" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="fava.util.typing.TypedDict">
+<span class="sig-prename descclassname"><span class="pre">fava.util.typing.</span></span><span class="sig-name descname"><span class="pre">TypedDict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">typename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fields</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">/</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">total</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fava.util.typing.TypedDict" title="Permalink to this definition">¶</a></dt>
+<dd><p>A simple typed namespace. At runtime it is equivalent to a plain dict.</p>
+<p>TypedDict creates a dictionary type that expects all of its
+instances to have a certain set of keys, where each key is
+associated with a value of a consistent type. This expectation
+is not checked at runtime but is only enforced by type checkers.
+Usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Point2D</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
+    <span class="n">x</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">y</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">label</span><span class="p">:</span> <span class="nb">str</span>
+
+<span class="n">a</span><span class="p">:</span> <span class="n">Point2D</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s1">&#39;good&#39;</span><span class="p">}</span>  <span class="c1"># OK</span>
+<span class="n">b</span><span class="p">:</span> <span class="n">Point2D</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;z&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s1">&#39;bad&#39;</span><span class="p">}</span>           <span class="c1"># Fails type check</span>
+
+<span class="k">assert</span> <span class="n">Point2D</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;first&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="nb">dict</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;first&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The type info can be accessed via the Point2D.__annotations__ dict, and
+the Point2D.__required_keys__ and Point2D.__optional_keys__ frozensets.
+TypedDict supports two additional equivalent forms:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Point2D</span> <span class="o">=</span> <span class="n">TypedDict</span><span class="p">(</span><span class="s1">&#39;Point2D&#39;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>
+<span class="n">Point2D</span> <span class="o">=</span> <span class="n">TypedDict</span><span class="p">(</span><span class="s1">&#39;Point2D&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>By default, all keys must be present in a TypedDict. It is possible
+to override this by specifying totality.
+Usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">point2D</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">,</span> <span class="n">total</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="n">x</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">y</span><span class="p">:</span> <span class="nb">int</span>
+</pre></div>
+</div>
+<p>This means that a point2D TypedDict can have any of the keys omitted.A type
+checker is only expected to support a literal False or True as the value of
+the total argument. True is the default, and makes all items defined in the
+class body be required.</p>
+<p>The class syntax is only supported in Python 3.6+, while two other
+syntax forms work for Python 2.7 and 3.2+</p>
+</dd></dl>
+
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../index.html">
+    <img class="logo" src="../_static/logo.png" alt="Logo"/>
+    
+    <h1 class="logo logo-name">Fava</h1>
+    
+  </a>
+</p>
+
+
+
+<p class="blurb">Web interface for <a href="http://furius.ca/beancount/">Beancount</a></p>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">Development</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html">API Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="fava.html">fava</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fava.core.html">fava.core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fava.ext.html">fava.ext</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fava.ext.portfolio_list.html">fava.ext.portfolio_list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fava.help.html">fava.help</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fava.plugins.html">fava.plugins</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">fava.util</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#module-fava.util.date">fava.util.date</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-fava.util.excel">fava.util.excel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-fava.util.ranking">fava.util.ranking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-fava.util.typing">fava.util.typing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+
+<hr />
+<ul>
+    
+    <li class="toctree-l1"><a href="https://github.com/beancount/fava">fava @ GitHub</a></li>
+    
+    <li class="toctree-l1"><a href="https://gitter.im/beancount/fava">Chat</a></li>
+    
+    <li class="toctree-l1"><a href="https://github.com/beancount/fava/issues">Issue Tracker</a></li>
+    
+</ul>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Dominik Aumayr.
+      
+      |
+      <a href="../_sources/api/fava.util.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

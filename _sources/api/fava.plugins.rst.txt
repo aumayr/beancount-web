@@ -1,0 +1,15 @@
+fava.plugins
+============
+
+.. automodule:: fava.plugins
+
+fava.plugins.link_documents
+---------------------------
+
+.. automodule:: fava.plugins.link_documents
+
+fava.plugins.tag_discovered_documents
+-------------------------------------
+
+.. automodule:: fava.plugins.tag_discovered_documents
+

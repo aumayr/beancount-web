@@ -1,0 +1,105 @@
+fava.core
+=========
+
+.. automodule:: fava.core
+
+fava.core._compat
+-----------------
+
+.. automodule:: fava.core._compat
+
+fava.core.accounts
+------------------
+
+.. automodule:: fava.core.accounts
+
+fava.core.attributes
+--------------------
+
+.. automodule:: fava.core.attributes
+
+fava.core.budgets
+-----------------
+
+.. automodule:: fava.core.budgets
+
+fava.core.charts
+----------------
+
+.. automodule:: fava.core.charts
+
+fava.core.conversion
+--------------------
+
+.. automodule:: fava.core.conversion
+
+fava.core.documents
+-------------------
+
+.. automodule:: fava.core.documents
+
+fava.core.entries_by_type
+-------------------------
+
+.. automodule:: fava.core.entries_by_type
+
+fava.core.extensions
+--------------------
+
+.. automodule:: fava.core.extensions
+
+fava.core.fava_options
+----------------------
+
+.. automodule:: fava.core.fava_options
+
+fava.core.file
+--------------
+
+.. automodule:: fava.core.file
+
+fava.core.filters
+-----------------
+
+.. automodule:: fava.core.filters
+
+fava.core.ingest
+----------------
+
+.. automodule:: fava.core.ingest
+
+fava.core.inventory
+-------------------
+
+.. automodule:: fava.core.inventory
+
+fava.core.misc
+--------------
+
+.. automodule:: fava.core.misc
+
+fava.core.module_base
+---------------------
+
+.. automodule:: fava.core.module_base
+
+fava.core.number
+----------------
+
+.. automodule:: fava.core.number
+
+fava.core.query_shell
+---------------------
+
+.. automodule:: fava.core.query_shell
+
+fava.core.tree
+--------------
+
+.. automodule:: fava.core.tree
+
+fava.core.watcher
+-----------------
+
+.. automodule:: fava.core.watcher
+

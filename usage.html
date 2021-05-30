@@ -1,0 +1,144 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Getting Started &#8212; Fava  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Changelog" href="changelog.html" />
+    <link rel="prev" title="Welcome to Fava!" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="getting-started">
+<h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
+<p>If you’re new to Beancount or double-entry accounting in general, we
+recommend <a class="reference external" href="https://docs.google.com/document/d/1e4Vz3wZB_8-ZcAwIFde8X5CjzKshE4-OXtVVHm4RQ8s/">Command-line Accounting in Context</a>,
+a motivational document written by Martin Blais, the author of Beancount.</p>
+<p>To learn how to create your beancount file, refer to <a class="reference external" href="https://docs.google.com/document/d/1P5At-z1sP8rgwYLHso5sEy3u4rMnIUDDgob9Y_BYuWE/">Getting Started with
+Beancount</a>
+guide. Martin Blais has written a great deal of very detailed documentation for
+Beancount, see the <a class="reference external" href="https://docs.google.com/document/d/1RaondTJCS_IUPBHFNdT8oqFKJjVJDsfsn6JEjBG04eA">Beancount Documentation</a>
+page for an index of the available documentation.</p>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>Fava is known to run on macOS, Linux, and Windows.  You will need <a class="reference external" href="https://www.python.org/downloads/">Python 3</a>.  Then you can use <code class="docutils literal notranslate"><span class="pre">pip</span></code> to install
+Fava or update your existing Installation by running:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">upgrade</span> <span class="n">fava</span>
+</pre></div>
+</div>
+<p>which will also pull in all required dependencies including Beancount. If you
+do not have Beancount installed already, you might want to have a look at its
+<a class="reference external" href="https://docs.google.com/document/d/1FqyrTPwiHVLyncWTf3v5TcooCu9z5JRX8Nm41lVZi0U">installation instructions</a>.</p>
+<p>If you want to export query results to Microsoft Excel or LibreOffice Calc, use
+the following command to install the optional dependencies for this feature:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">upgrade</span> <span class="n">fava</span><span class="p">[</span><span class="n">excel</span><span class="p">]</span>
+</pre></div>
+</div>
+</section>
+<section id="starting-fava">
+<h2>Starting Fava<a class="headerlink" href="#starting-fava" title="Permalink to this headline">¶</a></h2>
+<p>After installing Fava, you can start it by running:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fava</span> <span class="n">ledger</span><span class="o">.</span><span class="n">beancount</span>
+</pre></div>
+</div>
+<p>pointing it to your Beancount file – and visit the web interface at
+<a class="reference external" href="http://localhost:5000">http://localhost:5000</a>.</p>
+<p>There are some command-line options available, run <code class="docutils literal notranslate"><span class="pre">fava</span> <span class="pre">--help</span></code> for an overview.</p>
+<p>For more information on Fava’s features, refer to the help pages that are
+available through Fava’s web-interface.  Fava comes with Gmail-style keyboard
+shortcuts; press <code class="docutils literal notranslate"><span class="pre">?</span></code> to show an overview.</p>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="index.html">
+    <img class="logo" src="_static/logo.png" alt="Logo"/>
+    
+    <h1 class="logo logo-name">Fava</h1>
+    
+  </a>
+</p>
+
+
+
+<p class="blurb">Web interface for <a href="http://furius.ca/beancount/">Beancount</a></p>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#starting-fava">Starting Fava</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Documentation</a></li>
+</ul>
+
+
+<hr />
+<ul>
+    
+    <li class="toctree-l1"><a href="https://github.com/beancount/fava">fava @ GitHub</a></li>
+    
+    <li class="toctree-l1"><a href="https://gitter.im/beancount/fava">Chat</a></li>
+    
+    <li class="toctree-l1"><a href="https://github.com/beancount/fava/issues">Issue Tracker</a></li>
+    
+</ul>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Dominik Aumayr.
+      
+      |
+      <a href="_sources/usage.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
