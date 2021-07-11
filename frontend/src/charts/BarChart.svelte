@@ -1,14 +1,17 @@
 <script lang="ts">
-  import { extent, merge } from "d3-array";
+  import { extent, filter, merge, sum } from "d3-array";
   import { axisBottom, axisLeft } from "d3-axis";
-  import { scaleBand, scaleLinear } from "d3-scale";
+  import { scaleBand, scaleLinear, scaleOrdinal } from "d3-scale";
+  import { stack, stackOffsetDiverging } from "d3-shape";
   import { getContext } from "svelte";
   import type { Writable } from "svelte/store";
 
   import { ctx } from "../format";
+  import { urlFor } from "../helpers";
+  import router from "../router";
 
   import { axis } from "./axis";
-  import { currenciesScale, filterTicks, setTimeFilter } from "./helpers";
+  import { filterTicks, hclColorRange } from "./helpers";
   import { followingTooltip } from "./tooltip";
 
   import type { BarChart, BarChartDatumValue } from ".";
@@ -18,6 +21,14 @@
   export let tooltipText: BarChart["tooltipText"];
 
   const today = new Date();
+  $: accounts = Array.from(
+    new Set(
+      data
+        .map((x) => x.values.map((y_) => Array.from(y_.value.keys())).flat())
+        .flat()
+    )
+  );
+
   const maxColumnWidth = 100;
   const margin = {
     top: 10,
@@ -31,6 +42,8 @@
   $: offset = margin.left + Math.max(0, width - maxWidth) / 2;
   $: innerWidth = Math.min(width - margin.left - margin.right, maxWidth);
 
+  const netValueMarkerHeight = 6;
+
   // Scales
   $: x0 = scaleBand()
     .padding(0.1)
@@ -42,26 +55,40 @@
   let yMin = 0;
   let yMax = 0;
   $: [yMin = 0, yMax = 0] = extent(
-    merge<BarChartDatumValue>(data.map((d) => d.values)),
-    (d) => d.value
+    merge<BarChartDatumValue>(
+      data
+        .map((d) => [
+          d.values.map((r) => sum(filter(r.value.values(), (v) => v > 0))),
+          d.values.map((r) => sum(filter(r.value.values(), (v) => v < 0))),
+        ])
+        .flat()
+    )
   );
   $: y = scaleLinear()
     .range([innerHeight, 0])
     .domain([Math.min(0, yMin), Math.max(0, yMax)]);
+  $: colorScale = scaleOrdinal()
+    .domain(accounts)
+    .range(hclColorRange(accounts.length, 45, 80));
+
+  $: barData = stack()
+    .keys(accounts)
+    .value((d, key) =>
+      // FIXME: Multiple currencies?
+      d.values[0].value.get(key)
+    )
+    .offset(stackOffsetDiverging)(data);
 
   const legend: Writable<[string, string][]> = getContext("chart-legend");
-  $: legend.set(
-    x1
-      .domain()
-      .sort()
-      .map((c) => [c, $currenciesScale(c)])
-  );
+  $: legend.set(accounts.sort().map((a) => [a, colorScale(a)]));
 
   // Axes
   $: xAxis = axisBottom(x0)
     .tickSizeOuter(0)
     .tickValues(filterTicks(x0.domain(), innerWidth / 70));
   $: yAxis = axisLeft(y).tickSize(-innerWidth).tickFormat($ctx.short);
+
+  let highlighted = "";
 </script>
 
 <svg {width} {height}>
@@ -72,62 +99,91 @@
       transform={`translate(0,${innerHeight})`}
     />
     <g class="y axis" use:axis={yAxis} />
-    {#each data as group}
+    {#each barData as account}
       <g
-        class="group"
-        class:desaturate={group.date > today}
-        use:followingTooltip={() => tooltipText($ctx, group)}
-        transform={`translate(${x0(group.label)},0)`}
+        class="category"
+        class:highlighted={account.key === highlighted || highlighted === ""}
+        class:faded={account.key !== highlighted && highlighted !== ""}
       >
-        <rect
-          class="group-box"
-          x={(x0.bandwidth() - x0.step()) / 2}
-          width={x0.step()}
-          height={innerHeight}
-        />
-        <rect
-          class="axis-group-box"
-          on:click={() => {
-            setTimeFilter(group.date);
-          }}
-          transform={`translate(0,${innerHeight})`}
-          width={x0.bandwidth()}
-          height={margin.bottom}
-        />
-        {#each group.values as bar}
-          <rect
-            fill={$currenciesScale(bar.name)}
-            width={x1.bandwidth()}
-            x={x1(bar.name)}
-            y={y(Math.max(0, bar.value))}
-            height={Math.abs(y(bar.value) - y(0))}
-          />
-          <rect
-            class="budget"
-            width={x1.bandwidth()}
-            x={x1(bar.name)}
-            y={y(Math.max(0, bar.budget))}
-            height={Math.abs(y(bar.budget) - y(0))}
-          />
+        {#each account as bar}
+          {#if !Number.isNaN(bar[1])}
+            <rect
+              class:desaturate={bar.data.date > today}
+              width={x1.bandwidth()}
+              x={x0(bar.data.label)}
+              y={bar[0] > 0 ? y(bar[1]) : y(bar[1])}
+              height={Math.abs(y(bar[1]) - y(bar[0]))}
+              fill={colorScale(account.key)}
+              on:mouseover={() => {
+                highlighted = account.key;
+              }}
+              on:mouseout={() => {
+                highlighted = "";
+              }}
+              use:followingTooltip={() =>
+                tooltipText($ctx, bar.data, account.key)}
+              on:click={() =>
+                router.navigate(urlFor(`account/${account.key}/`))}
+            />
+          {/if}
         {/each}
       </g>
     {/each}
+    <g class="budget">
+      {#each data as v}
+        {#if v.values[0].budget !== 0}
+          <rect
+            width={x1.bandwidth()}
+            x={x0(v.label)}
+            y={y(Math.max(0, v.values[0].budget))}
+            height={Math.abs(y(v.values[0].budget) - y(0))}
+          />
+        {/if}
+      {/each}
+    </g>
+    <g class="net" class:highlighted={highlighted === "Net"}>
+      {#each data as v}
+        <rect
+          width={x1.bandwidth()}
+          x={x0(v.label)}
+          y={y(v.values[0].total_value) - netValueMarkerHeight / 2}
+          height={netValueMarkerHeight}
+          on:mouseover={() => {
+            highlighted = "Net";
+          }}
+          on:mouseout={() => {
+            highlighted = "";
+          }}
+          use:followingTooltip={() => tooltipText($ctx, v, null)}
+        />
+      {/each}
+    </g>
   </g>
 </svg>
 
 <style>
-  .axis-group-box {
+  .category.faded {
+    opacity: 0.5;
+  }
+
+  rect {
     cursor: pointer;
-    opacity: 0;
   }
-  .group-box {
-    opacity: 0;
+
+  .budget rect {
+    fill: none;
+    stroke: black;
+    stroke-dasharray: 2;
+    stroke-opacity: 0.5;
+    stroke-width: 1;
   }
-  .group:hover .group-box {
-    opacity: 0.1;
+
+  .net rect {
+    opacity: 0.4;
   }
-  .budget {
-    opacity: 0.3;
+
+  .net.highlighted rect {
+    opacity: 0.8;
   }
   .desaturate {
     filter: saturate(50%);

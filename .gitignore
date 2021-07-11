@@ -23,3 +23,4 @@ node_modules
 .env
 TODO
 npm-debug.log
+*.swp

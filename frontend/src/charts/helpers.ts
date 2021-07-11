@@ -36,7 +36,11 @@ export function filterTicks(domain: string[], count: number): string[] {
  * @param chroma - optional, the chroma channel value.
  * @param luminance - optional, the luminance channel value.
  */
-function hclColorRange(count: number, chroma = 45, luminance = 70): string[] {
+export function hclColorRange(
+  count: number,
+  chroma = 45,
+  luminance = 70
+): string[] {
   const offset = 270;
   const delta = 360 / count;
   const colors = [...Array(count).keys()].map((index) => {

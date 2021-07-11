@@ -7,6 +7,7 @@ from typing import List
 from typing import NamedTuple
 from typing import Tuple
 from typing import TYPE_CHECKING
+from typing import Union
 
 from beancount.core.data import Custom
 from beancount.core.number import Decimal
@@ -64,7 +65,7 @@ class BudgetModule(FavaModule):
 
     def calculate_children(
         self,
-        account: str,
+        account: Union[str, Tuple[str]],
         begin_date: datetime.date,
         end_date: datetime.date,
     ) -> Dict[str, Decimal]:
@@ -185,7 +186,7 @@ def calculate_budget(
 
 def calculate_budget_children(
     budgets: BudgetDict,
-    account: str,
+    account: Union[str, Tuple[str]],
     date_from: datetime.date,
     date_to: datetime.date,
 ) -> Dict[str, Decimal]:
@@ -193,7 +194,7 @@ def calculate_budget_children(
 
     Args:
         budgets: A list of :class:`Budget` entries.
-        account: An account name.
+        account: A list of account names.
         date_from: Starting date.
         date_to: End date (exclusive).
 

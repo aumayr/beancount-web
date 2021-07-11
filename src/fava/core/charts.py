@@ -13,6 +13,7 @@ from typing import Union
 from beancount.core import realization
 from beancount.core.amount import Amount
 from beancount.core.data import iter_entry_dates
+from beancount.core.data import Posting
 from beancount.core.data import Transaction
 from beancount.core.inventory import Inventory
 from beancount.core.number import Decimal
@@ -91,8 +92,9 @@ class DateAndBalanceWithBudget(TypedDict):
     """Balance at a date with a budget."""
 
     date: date
-    balance: Inventory
+    balance: Dict[str, Inventory]
     budgets: Dict[str, Decimal]
+    total_balance: Inventory
 
 
 class ChartModule(FavaModule):
@@ -129,6 +131,24 @@ class ChartModule(FavaModule):
             if prices:
                 yield base, quote, prices
 
+    @staticmethod
+    def augment_inventory(
+        inventories: Dict[str, Inventory], account: str, posting: Posting
+    ) -> None:
+        """Adds posting to inventory under specified account name.
+
+        Args:
+            inventories: Dictionary of inventories keyed by account name.
+            account: A single account, used to identify an inventory.
+            posting: A posting to add to the specified inventory.
+        """
+        inventory = inventories.get(account)
+        if inventory is None:
+            inventory = Inventory()
+        inventory.add_position(posting)
+        inventories[account] = inventory
+
+    # pylint: disable=too-many-locals
     @listify
     def interval_totals(
         self,
@@ -136,6 +156,7 @@ class ChartModule(FavaModule):
         accounts: Union[str, Tuple[str]],
         conversion: str,
         invert: bool = False,
+        descend: bool = False,
     ) -> Generator[DateAndBalanceWithBudget, None, None]:
         """Renders totals for account (or accounts) in the intervals.
 
@@ -144,32 +165,59 @@ class ChartModule(FavaModule):
             accounts: A single account (str) or a tuple of accounts.
             conversion: The conversion to use.
         """
-        price_map = self.ledger.price_map
-        for begin, end in pairwise(self.ledger.interval_ends(interval)):
-            inventory = Inventory()
-            entries = iter_entry_dates(self.ledger.entries, begin, end)
-            for entry in (e for e in entries if isinstance(e, Transaction)):
-                for posting in entry.postings:
-                    if posting.account.startswith(accounts):
-                        inventory.add_position(posting)
+        if isinstance(accounts, str):
+            accounts = (accounts,)
 
-            balance = cost_or_value(
-                inventory, conversion, price_map, end - ONE_DAY
+        for begin, end in pairwise(self.ledger.interval_ends(interval)):
+            inventories: Dict[str, Inventory] = {}
+            total_inventory = Inventory()
+            entries = iter_entry_dates(self.ledger.entries, begin, end)
+            for entry in [e for e in entries if isinstance(e, Transaction)]:
+                for posting in entry.postings:
+                    for account in accounts:
+                        if (
+                            not descend and posting.account.startswith(account)
+                        ) or posting.account == account:
+                            self.augment_inventory(
+                                inventories, account, posting
+                            )
+                            total_inventory.add_position(posting)
+                        elif posting.account.startswith(account):
+                            levels = account.count(":") + 2
+                            child_account = ":".join(
+                                posting.account.split(":")[:levels]
+                            )
+                            self.augment_inventory(
+                                inventories, child_account, posting
+                            )
+                            total_inventory.add_position(posting)
+
+            balances = {}
+            total_balance: Inventory = cost_or_value(
+                total_inventory,
+                conversion,
+                self.ledger.price_map,
+                end - ONE_DAY,
             )
-            budgets = {}
-            if isinstance(accounts, str):
-                budgets = self.ledger.budgets.calculate_children(
-                    accounts, begin, end
+
+            for account, inventory in inventories.items():
+                balances[account] = cost_or_value(
+                    inventory, conversion, self.ledger.price_map, end - ONE_DAY
                 )
+
+            budgets = self.ledger.budgets.calculate_children(
+                accounts, begin, end
+            )
 
             if invert:
                 # pylint: disable=invalid-unary-operand-type
-                balance = -balance
+                total_balance = -total_balance
                 budgets = {k: -v for k, v in budgets.items()}
 
             yield {
                 "date": begin,
-                "balance": balance,
+                "balance": balances,
+                "total_balance": total_balance,
                 "budgets": budgets,
             }
 
